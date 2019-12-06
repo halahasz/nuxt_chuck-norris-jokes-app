@@ -1,11 +1,17 @@
 <template>
-  <div>jokes</div>
+  <div>
+    <Joke :key="joke.id" v-for="joke in jokes" :id="joke.id" :joke="joke.joke" />
+  </div>
 </template>
 
 <script>
 import axios from "axios";
+import Joke from "../../components/Joke";
 
 export default {
+  components: {
+    Joke
+  },
   data() {
     return {
       jokes: []
@@ -18,8 +24,12 @@ export default {
       }
     };
     try {
-      const res = await axios.get("http://api.icndb.com/jokes/random/10", config);
+      const res = await axios.get(
+        "http://api.icndb.com/jokes/random/10",
+        config
+      );
       this.jokes = res.data.value;
+      console.log(res.data.value);
     } catch (err) {
       console.log(err);
     }
