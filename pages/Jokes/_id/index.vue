@@ -18,7 +18,7 @@ export default {
   },
   head() {
     return {
-      title: this.joke,
+      title: "Joke",
       meta: [
         {
           hid: "description",
