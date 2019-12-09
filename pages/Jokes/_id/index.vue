@@ -36,7 +36,7 @@ export default {
     };
     try {
       const res = await axios.get(
-        `http://api.icndb.com/jokes/${this.$route.params.id}`,
+        `https://api.icndb.com/jokes/${this.$route.params.id}`,
         config
       );
       this.joke = res.data.value.joke;

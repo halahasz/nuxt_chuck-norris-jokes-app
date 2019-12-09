@@ -1,16 +1,24 @@
 <template>
   <div>
-    <Joke :key="joke.id" v-for="joke in jokes" :id="joke.id" :joke="joke.joke" />
+    <SearchJokes v-on:search-text="searchText" />
+    <Joke
+      :key="joke.id"
+      v-for="joke in jokes"
+      :id="joke.id"
+      :joke="joke.joke"
+    />
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import Joke from "../../components/Joke";
+import SearchJokes from "../../components/SearchJokes";
 
 export default {
   components: {
-    Joke
+    Joke,
+    SearchJokes
   },
   data() {
     return {
@@ -25,13 +33,31 @@ export default {
     };
     try {
       const res = await axios.get(
-        "http://api.icndb.com/jokes/random/10",
+        "https://api.icndb.com/jokes/random/5",
         config
       );
       this.jokes = res.data.value;
       console.log(res.data.value);
     } catch (err) {
       console.log(err);
+    }
+  },
+  methods: {
+    async searchText(text) {
+      const config = {
+      headers: {
+        Accept: "application/json"
+      }
+    };
+    try {
+      const res = await axios.get(
+        "https://api.icndb.com/jokes",
+        config
+      );
+      this.jokes = res.data.value.filter(a => a.joke.toLowerCase().split(' ').includes(text))
+    } catch (err) {
+      console.log(err);
+    }
     }
   },
   head() {
