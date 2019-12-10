@@ -17,6 +17,7 @@
 import axios from "axios";
 import Joke from "../../components/Joke";
 import SearchJokes from "../../components/SearchJokes";
+const url = "https://api.icndb.com/jokes";
 
 export default {
   components: {
@@ -36,7 +37,7 @@ export default {
     };
     try {
       const res = await axios.get(
-        "https://api.icndb.com/jokes/random/5",
+        `${url}/random/5`,
         config
       );
       let newJokes = res.data.value.map(joke => ({
@@ -57,9 +58,9 @@ export default {
       };
 
       try {
-        const res = await axios.get("https://api.icndb.com/jokes", config);
+        const res = await axios.get(url, config);
         const resRand = await axios.get(
-          "https://api.icndb.com/jokes/random/5",
+          `${url}/random/5`,
           config
         );
         const newJokes = res.data.value.map(joke => ({
@@ -71,14 +72,12 @@ export default {
           joke: joke.joke.replace(/&quot;/g, '"')
         }));
         text.length > 0
-          ? (this.jokes = newJokes.filter(joke => ({
-              id: joke.id,
-              joke: joke.joke
+          ? (this.jokes = newJokes.filter(joke => joke.joke
                 .toLowerCase()
                 .split(" ")
                 .includes(text)
-            })))
-          : (this.jokes = newJokes);
+            ))
+          : (this.jokes = newJokesRand);
       } catch (err) {
         console.log(err);
       }

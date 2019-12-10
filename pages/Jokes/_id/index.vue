@@ -9,6 +9,7 @@
 
 <script>
 import axios from "axios";
+const url = "https://api.icndb.com/jokes";
 
 export default {
   data() {
@@ -36,7 +37,7 @@ export default {
     };
     try {
       const res = await axios.get(
-        `https://api.icndb.com/jokes/${this.$route.params.id}`,
+        `${url}/${this.$route.params.id}`,
         config
       );
       this.joke = res.data.value.joke.replace(/&quot;/g,'"');
