@@ -2,7 +2,7 @@
   <div>
     <nuxt-link to="/jokes">Back to jokes</nuxt-link>
     <h2>{{ joke }}</h2>
-    <hr />
+    <div class="hr"></div>
     <small>Joke id: {{ $route.params.id }}</small>
   </div>
 </template>
@@ -49,4 +49,32 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+h2 {
+  color: rgb(115, 121, 150);
+  text-align: center;
+  font-size: 18px;
+  padding: 30px 15px;
+}
+.nuxt-link-active {
+  /* border: 1px solid rgb(120, 117, 150); */
+  background: transparent;
+  color: rgb(31, 21, 146);
+  box-shadow: 0 5px 20px -5px rgb(149, 170, 228);
+  display: inline-block;
+  padding: .3rem 1rem;
+  border-radius: 5px;
+  transition: all .2s ease-in-out;
+}
+.nuxt-link-active:hover {
+  background: rgb(155, 179, 223);
+  color: #fff;
+  margin-right: .5rem;
+}
+.hr {
+  height: 1px;
+  width: 100%;
+  background-color: rgb(184, 224, 181);
+}
+
+</style>
