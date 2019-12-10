@@ -1,14 +1,14 @@
 <template>
   <div>
     <h1>
-      Welcome to the best Chuck Norris jokes app on the web
+      Welcome to the Chuck Norris jokes app
     </h1>
   </div>
 </template>
 
 <script>
 export default {
-   head() {
+  head() {
     return {
       title: "Welcome to Chuck Norris jokes app",
       meta: [
@@ -20,6 +20,14 @@ export default {
       ]
     };
   }
-}
+};
 </script>
 
+<style>
+h1 {
+  color: rgb(115, 121, 150);
+  text-align: center;
+  font-size: 25px;
+  padding: 30px 15px 50px;
+}
+</style>

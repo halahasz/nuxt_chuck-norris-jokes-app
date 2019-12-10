@@ -35,6 +35,7 @@ export default {
   font-size: 3rem;
   color:rgb(69, 78, 119);
   font-weight: 700;
+  padding: 20px;
 }
 .header ul {
   display: flex;

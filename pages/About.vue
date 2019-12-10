@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>About Chuck Norris jokes</h1>
-    <p>This is an app that displays Chuck Norris jokes</p>
+    <p class="desc">This is an app that displays Chuck Norris jokes</p>
   </div>
 </template>
 
@@ -22,4 +22,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.desc {
+  color: rgb(115, 121, 150);
+  text-align: center;
+  font-size: 18px;
+  padding: 0px 15px 50px;
+}
+</style>

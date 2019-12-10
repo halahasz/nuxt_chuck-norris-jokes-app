@@ -7,6 +7,9 @@
       :id="joke.id"
       :joke="joke.joke"
     />
+    <p class="desc">
+      {{ jokes.length === 0 ? "There is no joke to match this term" : null }}
+    </p>
   </div>
 </template>
 
@@ -37,7 +40,6 @@ export default {
         config
       );
       this.jokes = res.data.value;
-      console.log(res.data.value);
     } catch (err) {
       console.log(err);
     }
@@ -45,19 +47,28 @@ export default {
   methods: {
     async searchText(text) {
       const config = {
-      headers: {
-        Accept: "application/json"
+        headers: {
+          Accept: "application/json"
+        }
+      };
+
+      try {
+        const res = await axios.get("https://api.icndb.com/jokes", config);
+        const resRand = await axios.get(
+          "https://api.icndb.com/jokes/random/5",
+          config
+        );
+        text.length > 0
+          ? (this.jokes = res.data.value.filter(a =>
+              a.joke
+                .toLowerCase()
+                .split(" ")
+                .includes(text)
+            ))
+          : (this.jokes = resRand.data.value);
+      } catch (err) {
+        console.log(err);
       }
-    };
-    try {
-      const res = await axios.get(
-        "https://api.icndb.com/jokes",
-        config
-      );
-      this.jokes = res.data.value.filter(a => a.joke.toLowerCase().split(' ').includes(text))
-    } catch (err) {
-      console.log(err);
-    }
     }
   },
   head() {
