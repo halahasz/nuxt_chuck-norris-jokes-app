@@ -11,6 +11,7 @@ export default {
   name: "Joke",
   props: ["joke", "id"]
 };
+
 </script>
 
 <style>

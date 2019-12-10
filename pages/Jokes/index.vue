@@ -7,8 +7,8 @@
       :id="joke.id"
       :joke="joke.joke"
     />
-    <p class="desc">
-      {{ jokes.length === 0 ? "There is no joke to match this term" : null }}
+    <p class="noJokes" v-if="jokes.length === 0">
+      There is no joke to match this term
     </p>
   </div>
 </template>
@@ -39,7 +39,11 @@ export default {
         "https://api.icndb.com/jokes/random/5",
         config
       );
-      this.jokes = res.data.value;
+      let newJokes = res.data.value.map(joke => ({
+        id: joke.id,
+        joke: joke.joke.replace(/&quot;/g, '"')
+      }));
+      this.jokes.push(...newJokes);
     } catch (err) {
       console.log(err);
     }
@@ -58,14 +62,23 @@ export default {
           "https://api.icndb.com/jokes/random/5",
           config
         );
+        const newJokes = res.data.value.map(joke => ({
+          id: joke.id,
+          joke: joke.joke.replace(/&quot;/g, '"')
+        }));
+        const newJokesRand = resRand.data.value.map(joke => ({
+          id: joke.id,
+          joke: joke.joke.replace(/&quot;/g, '"')
+        }));
         text.length > 0
-          ? (this.jokes = res.data.value.filter(a =>
-              a.joke
+          ? (this.jokes = newJokes.filter(joke => ({
+              id: joke.id,
+              joke: joke.joke
                 .toLowerCase()
                 .split(" ")
                 .includes(text)
-            ))
-          : (this.jokes = resRand.data.value);
+            })))
+          : (this.jokes = newJokes);
       } catch (err) {
         console.log(err);
       }
@@ -86,4 +99,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.noJokes {
+  color: rgb(115, 121, 150);
+  text-align: center;
+  font-size: 18px;
+  padding: 40px 15px;
+}
+</style>

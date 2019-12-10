@@ -13,7 +13,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      joke: {}
+      joke: ''
     };
   },
   head() {
@@ -39,7 +39,8 @@ export default {
         `https://api.icndb.com/jokes/${this.$route.params.id}`,
         config
       );
-      this.joke = res.data.value.joke;
+      this.joke = res.data.value.joke.replace(/&quot;/g,'"');
+      conslole.log(this.joke)
     } catch (err) {
       console.log(err);
     }
