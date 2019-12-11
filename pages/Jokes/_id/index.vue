@@ -57,8 +57,6 @@ h2 {
   padding: 30px 15px;
 }
 .nuxt-link-active {
-  /* border: 1px solid rgb(120, 117, 150); */
-  background: transparent;
   color: rgb(31, 21, 146);
   box-shadow: 0 5px 20px -5px rgb(149, 170, 228);
   display: inline-block;

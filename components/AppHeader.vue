@@ -50,7 +50,7 @@ export default {
   border: 1px solid rgb(155, 179, 223);
   transition: all .2s ease-in-out;
 }
-.header a:hover {
+.header a:hover, .header .nuxt-link-active {
   border: 1px solid rgb(120, 117, 150);
   background: transparent;
   color: rgb(120, 117, 150);

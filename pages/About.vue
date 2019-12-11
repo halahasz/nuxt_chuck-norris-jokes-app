@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>About Chuck Norris jokes</h1>
+    <h1 class="about-h1">About Chuck Norris jokes</h1>
     <p class="desc">This is an app that displays Chuck Norris jokes</p>
   </div>
 </template>
@@ -28,5 +28,8 @@ export default {
   text-align: center;
   font-size: 18px;
   padding: 0px 15px 50px;
+}
+.about-h1 {
+  padding-bottom: 20px;
 }
 </style>
