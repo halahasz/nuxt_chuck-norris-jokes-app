@@ -1,17 +1,27 @@
 <template>
   <div>
     <SearchJokes v-on:search-text="searchText" />
-    <Joke
-      :key="joke.id"
-      v-for="joke in jokes"
-      v-if="jokes != 'noJokes'"
-      :id="joke.id"
-      :joke="joke.joke"
-    />
+    <transition-group  name="list-animation">
+      <Joke
+        :key="joke.id"
+        v-for="joke in jokes"
+        :id="joke.id"
+        :joke="joke.joke"
+      />
+    </transition-group>
     <p class="noJokes" v-if="jokes == 'noJokes'">
       There is no jokes matching this term
     </p>
-    <div class="lds-roller" :busy="isBussy" v-if="isBussy"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div class="lds-roller" :busy="isBussy" v-if="isBussy">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </div>
 </template>
 
@@ -29,6 +39,7 @@ export default {
   data() {
     return {
       jokes: [],
+      test: [],
       isBussy: true
     };
   },
@@ -65,6 +76,7 @@ export default {
           id: joke.id,
           joke: joke.joke.replace(/&quot;/g, '"')
         }));
+        this.jokes = newJokes;
         const newJokesRand = resRand.data.value.map(joke => ({
           id: joke.id,
           joke: joke.joke.replace(/&quot;/g, '"')
@@ -77,7 +89,7 @@ export default {
         );
         text.length > 0 && filterJokes.length > 0
           ? (this.jokes = filterJokes)
-          : text.length > 0 
+          : text.length > 0
           ? (this.jokes = "noJokes")
           : (this.jokes = newJokesRand);
       } catch (err) {
@@ -101,6 +113,14 @@ export default {
 </script>
 
 <style>
+.list-animation-enter, .list-animation-leave-to {
+	opacity: 0;
+	transform: translateY(30px);
+}
+
+.list-animation-leave-active {
+	position: absolute;
+}
 .noJokes {
   color: rgb(115, 121, 150);
   text-align: center;
@@ -111,7 +131,7 @@ export default {
 /* loader */
 .lds-roller {
   margin: 0 auto;
-  transform: scale(.6);
+  transform: scale(0.6);
   position: relative;
   width: 80px;
   height: 80px;
