@@ -81,11 +81,11 @@ export default {
           id: joke.id,
           joke: joke.joke.replace(/&quot;/g, '"')
         }));
+        var re = new RegExp(text, 'gi');
         const filterJokes = newJokes.filter(joke =>
           joke.joke
             .toLowerCase()
-            .split(" ")
-            .includes(text)
+            .match(re)
         );
         text.length > 0 && filterJokes.length > 0
           ? (this.jokes = filterJokes)
