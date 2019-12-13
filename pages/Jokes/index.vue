@@ -1,7 +1,7 @@
 <template>
   <div>
     <SearchJokes v-on:search-text="searchText" />
-    <transition-group  name="list-animation">
+    <transition-group name="list-animation">
       <Joke
         :key="joke.id"
         v-for="joke in jokes"
@@ -113,13 +113,20 @@ export default {
 </script>
 
 <style>
-.list-animation-enter, .list-animation-leave-to {
-	opacity: 0;
-	transform: translateY(30px);
+.list-animation-enter,
+.list-animation-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
 }
 
 .list-animation-leave-active {
-	position: absolute;
+  position: absolute;
+  width: 100%;
+}
+@media screen and (max-width: 800px) {
+  .list-animation-leave-active {
+    width: 800vw;
+  }
 }
 .noJokes {
   color: rgb(115, 121, 150);

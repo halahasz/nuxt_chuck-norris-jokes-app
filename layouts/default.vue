@@ -1,8 +1,10 @@
 <template>
+<div class="wrapper">
   <div class="container">
     <AppHeader />
     <nuxt />
   </div>
+</div>
 </template>
 
 <script>
@@ -35,11 +37,15 @@ a {
 ul {
   list-style: none;
 }
-.container {
-  max-width: 800px;
-  margin: 2rem auto;
-  overflow: hidden;
+.wrapper {
   padding: 1rem 2rem;
   background: #fff;
+  max-width: 800px;
+  margin: 2rem auto;
 }
+.container {
+  /* overflow: hidden; */
+  position: relative;
+}
+
 </style>
